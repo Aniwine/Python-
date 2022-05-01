@@ -3,6 +3,8 @@
 > 张量，张量运算，微分，梯度下降，反向传播等
 >
 > 注：文中所写的代码只是笔者个人觉得要注意。并不全，需要完整代码的请参考书籍。
+>
+> 要显示数学公式请给浏览器装插件MathJax Plugin for Github（需要fq）
 
 ### 2.1 初识神经网络
 #### 1.数据集
@@ -187,12 +189,12 @@ my_slice = train_images[:, 7:-7, 7:-7]
 
 #### 2.2.8 现实张量
 
->  向量数据：2D 张量，形状为 (samples, features)。
->  时间序列数据或序列数据：3D 张量，形状为 (samples, timesteps, features)。
->  图像：4D张量，形状为(samples, height, width, channels)或(samples, channels,
-> height, width)。
->  视频：5D张量，形状为(samples, frames, height, width, channels)或(samples,
-> frames, channels, height, width)。
+> 向量数据：2D 张量，形状为 (samples, features)。  
+> 时间序列数据或序列数据：3D 张量，形状为 (samples, timesteps, features)。  
+> 图像：4D张量，形状为(samples, height, width, channels)或(samples, channels,
+> height, width)。  
+> 视频：5D张量，形状为(samples, frames, height, width, channels)或(samples,
+> frames, channels, height, width)。  
 
 **向量张量**  
 
@@ -200,10 +202,10 @@ my_slice = train_images[:, 7:-7, 7:-7]
 
 注意一个数据集用什么张量存储不是取决于某一个样本有几个特征，而是这些特征可不可以放在一个维度里。比如
 
->  人口统计数据集，其中包括每个人的年龄、邮编和收入。每个人可以表示为包含 3 个值
+> 人口统计数据集，其中包括每个人的年龄、邮编和收入。每个人可以表示为包含 3 个值
 > 的向量，而整个数据集包含100 000 个人，因此可以存储在形状为(100000, 3) 的2D
-> 张量中。
->  文本文档数据集，我们将每个文档表示为每个单词在其中出现的次数（字典中包含
+> 张量中。  
+> 文本文档数据集，我们将每个文档表示为每个单词在其中出现的次数（字典中包含
 > 20 000 个常见单词）。每个文档可以被编码为包含20 000 个值的向量（每个值对应于
 > 字典中每个单词的出现次数），整个数据集包含500 个文档，因此可以存储在形状为
 > (500, 20000) 的张量中。
@@ -214,7 +216,7 @@ my_slice = train_images[:, 7:-7, 7:-7]
 
 有些数据可能有时间需求或其他的类似需求。就可以将数据存储在3D张量里，一般序列都存在轴1上，比如
 
-![alt 图片](E:\文件\计算机\GitHub笔记本\python深度学习\第二章\images\time_data.jpg "图1")
+![alt 图片](.\images\time_data.jpg "图1")
 
 
 
@@ -229,7 +231,7 @@ my_slice = train_images[:, 7:-7, 7:-7]
 
 再有，还会用通道来描述颜色深度，（channels)。
 
-![alt 图片](E:\文件\计算机\GitHub笔记本\python深度学习\第二章\images\4d-tensor-image.jpg "图2")
+![alt 图片](.\images\4d-tensor-image.jpg "图2")
 
 **视频数据**
 
@@ -256,9 +258,9 @@ keras.layers.Dense(512,activation='relu')
 这里的input是一个2D张量，像这样,轴0表示samples，纵轴表示features
 $$
 \begin{bmatrix}
-{a_{11}}&{a_{12}}&{a_{13}}&{\cdots}&{a_{1784}} \\
-{a_{21}}&{a_{22}}&{a_{23}}&{\cdots}&{a_{2784}} \\
-{\vdots}&{\vdots}&{\vdots}&{\ddots}&{\vdots} \\
+{a_{11}}&{a_{12}}&{a_{13}}&{\cdots}&{a_{1784}} \\  
+{a_{21}}&{a_{22}}&{a_{23}}&{\cdots}&{a_{2784}} \\  
+{\vdots}&{\vdots}&{\vdots}&{\ddots}&{\vdots} \\  
 {a_{600001}}&{a_{600002}}&{a_{600003}}&{\cdots}&{a_{60000784}}
 \end{bmatrix} \tag{1}
 $$
@@ -267,18 +269,18 @@ $$
 W是这样的一个东西，w的行数表示一个神经元有多少权重系数，这取决于输入数据即矩阵1的列数，而列数表示这一层要将这个数据转换为多少类别。比如这里的512。也就是神经元的个数。
 $$
 \begin{bmatrix}
-{w_{11}}&{w_{12}}&{\cdots}&{w_{1512}} \\
-{w_{21}}&{w_{22}}&{\cdots}&{w_{2512}} \\
-{\vdots}&{\vdots}&{\ddots}&{\vdots} \\
+{w_{11}}&{w_{12}}&{\cdots}&{w_{1512}} \\  
+{w_{21}}&{w_{22}}&{\cdots}&{w_{2512}} \\  
+{\vdots}&{\vdots}&{\ddots}&{\vdots} \\  
 {w_{7841}}&{w_{7842}}&{\cdots}&{w_{784512}} 
 \end{bmatrix} \tag{2}
 $$
 然后他们做点积：
 $$
 \begin{bmatrix}
-{y_{11}}&{y_{12}}&{\cdots}&{y_{1512}} \\
-{y_{21}}&{y_{22}}&{\cdots}&{y_{2512}} \\
-{\vdots}&{\vdots}&{\ddots}&{\vdots} \\
+{y_{11}}&{y_{12}}&{\cdots}&{y_{1512}} \\  
+{y_{21}}&{y_{22}}&{\cdots}&{y_{2512}} \\  
+{\vdots}&{\vdots}&{\ddots}&{\vdots} \\  
 {y_{6w1}}&{y_{6w2}}&{\cdots}&{y_{6w512}} 
 \end{bmatrix} \tag{3}
 $$
@@ -329,6 +331,6 @@ train_images = train_images.reshape((60000, 28 * 28))
 
 神经网络有一系列的张量运算构成，那么神经网络就可以解释为高维空间里很复杂的几何变换，这种变换可以通过很多简单的步骤来实现。  
 
-![alt 图片](E:\文件\计算机\GitHub笔记本\python深度学习\第二章\images\神经网络的几何解释.jpg)
+![alt 图片](.\images\神经网络的几何解释.jpg)
 
 让纸球恢复平整就是机器学习的内容：为复杂的、高度折叠的数据流形找到简洁的表示。现在你应该能够很好地理解，为什么深度学习特别擅长这一点：它将复杂的几何变换逐步分解为一长串基本的几何变换，这与人类展开纸球所采取的策略大致相同。深度网络的每一层都通过变换使数据解开一点点——许多层堆叠在一起，可以实现非常复杂的解开过程。
