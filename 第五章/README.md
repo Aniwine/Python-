@@ -177,7 +177,7 @@ model.fit(train_images, train_labels, epochs=5, batch_size=64)
 
 ![图片](./images/填充.jpg)
 
-在Conv2D层里，使用padding来设置填充，默认为"valid"-不填充，"same"表示填充使得输入输出宽高相同。
+在Conv2D层里，使用padding来设置填充，默认为"valid"-不填充，~~"same"表示填充使得输入输出宽高相同。~~ 这里之前说的有问题，填充的目的是使得原来的每个像素点都可以在卷积核的中心，步长为1时，same填充的输出和输入宽高相同，而步长为2时就会使得输出像素点减半（宽高减半）。
 
 **2. 理解卷积步幅(很少使用)**
 
